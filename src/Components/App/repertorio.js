@@ -8,5 +8,8 @@ const repertorio = [
     {name: '‘Time to Pretend’', artist: 'MGMT', album: 'Running on Empty (Elektra)', id: 12360},
  ];
 
+export const playlistName = 'Playlist Name 1';
 
- export default repertorio;
+export const playlistTracks = [];
+
+export default repertorio;
