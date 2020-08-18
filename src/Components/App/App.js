@@ -3,10 +3,11 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import Spotify from '../../util/Spotify';
 // HARDCODED DATA
-import repertorio from './repertorio';
-import { playlistName } from './repertorio';
-import { playlistTracks } from './repertorio';
+// import repertorio from './repertorio';
+// import { playlistName } from './repertorio';
+// import { playlistTracks } from './repertorio';
 // HARDCODED DATA
 
 class App extends React.Component {
@@ -14,9 +15,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: repertorio,
-      playlistName: playlistName,
-      playlistTracks: playlistTracks
+      searchResults: [],
+      playlistName: 'New playlist',
+      playlistTracks: []
     }
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -26,7 +27,9 @@ class App extends React.Component {
   }
 
   search(term) {
-    console.log(term);
+    Spotify.search(term).then(searchResults => {
+      this.setState({searchResults: searchResults})
+    })
   }
 
   addTrack(track) {
@@ -53,7 +56,12 @@ class App extends React.Component {
     const tracks = this.state.playlistTracks;
     let uriArr = tracks.map(track => track.uri);
     console.log(uriArr);
-    return uriArr;
+    Spotify.savePlaylist(this.state.playlistName, uriArr).then( () => {
+      this.setState({
+        playlistName: 'New playlist',
+        playlistTracks: []
+      })
+    });
   }
 
   render() {
