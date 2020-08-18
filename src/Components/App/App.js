@@ -16,7 +16,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchResults: [],
-      playlistName: 'New playlist',
+      playlistName: 'Nueva Playlist',
       playlistTracks: []
     }
     this.addTrack = this.addTrack.bind(this);
@@ -58,7 +58,7 @@ class App extends React.Component {
     console.log(uriArr);
     Spotify.savePlaylist(this.state.playlistName, uriArr).then( () => {
       this.setState({
-        playlistName: 'New playlist',
+        playlistName: 'Nueva Playlist',
         playlistTracks: []
       })
     });
@@ -67,7 +67,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Ja<span className="highlight">mmm</span>ing</h1>
+        <h1>Los<span className="highlight"> Tem</span>itas</h1>
         <div className="App">
             <SearchBar onSearch={this.search} />
           <div className="App-playlist">
